@@ -1,0 +1,42 @@
+	The space partitioning feature of motelab allows the lab to be split
+into multiple zones on which jobs can run simultaneously.  These zones are
+defined as a list of mote IDs in a 'zones' table that looks like this:
+
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| name  | varchar(128) |      |     |         |                |
+| id    | int(11)      |      | PRI | NULL    | auto_increment |
+| motes | text         |      |     |         |                |
++-------+--------------+------+-----+---------+----------------+
+
+	When a job is scheduled to run on a zone the view-schedule.php page
+examines the 'jobfiles' table to discover which programs to run on which
+motes.  The information in the jobfiles table is set on the 'motes' tab of the
+job creation/edit page.  If jobfiles does not have a program listed for a mote
+in the zone then nothing will run on it and the mote will be available to
+other jobs.
+
+	It's important to note that all conflict checking is done on a
+per-mote basis.  So it's possible to have multiple overlapping zones, and
+motelab should just do the right thing if there's a conflict at schedule time.
+
+	After view-schedule.php checks for conflicts it updates the
+'jobschedule' table.  The jobschedule table requires a couple new fields for
+zone support, and they look like this:
+
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| zoneid      | int(11)  | YES  |     | NULL    |       |
+| moteprogram | text     | YES  |     | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+
+	The moteprogram field is set to the moteID/fileID pairs for the zone,
+as extracted from the jobfiles table.  The zoneid is set to the id number of
+the zone.
+
+	The jobdaemon uses the information in this moteprogram field to
+actually program the motes with the different executables.  It also looks at
+moteprogram to make sure it only clears programs from the proper motes and not
+the whole lab.
