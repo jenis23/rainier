@@ -1,0 +1,35 @@
+/usr/bin/java -cp /var/www/web/util/tinyos.jar net.tinyos.sf.SerialForwarder -comm serial@/dev/ttyUSB0:115200  -no-gui -quiet
+SF enabled, 0 clients, 0 packets read, 0 packets written                                                                               SF enabled, 0 clients, 0 packets read, 0 packets written                                                                               SF enabled, 0 clients, 0 packets read, 0 packets written                                                                               SF enabled, 0 clients, 0 packets read, 0 packets written select files.path, files.name, files.user, files.type, files.id, jobfiles.moteid from files, jobfiles where jobfiles.jobid=39 and jobfiles.fileid = files.id and jobfiles.moteid = 0
+TestSerialMsg
+/var/www/web/users/thanh.dang@vancouver.wsu.edu/upload/TestSerialMsg_20121002135410.class
+TestSerialMsg
+/var/www/web/users/thanh.dang@vancouver.wsu.edu/jobs/job39_157
+Current mote program : 2
+fileid 82
+Added program /var/www/web/users/thanh.dang@vancouver.wsu.edu/upload/testserialMain_20121002135348.exe for mote #1
+
+/usr/bin/jar cvf /var/www/web/users/thanh.dang@vancouver.wsu.edu/jobs/job39_157/classes.jar -C /var/www/web/users/thanh.dang@vancouver.wsu.edu/jobs/job39_157/jar/ TestSerialMsg.class 
+/usr/bin/java -Xms2m -Xmx3m -cp /var/www/web/util/tinyos.jar:/var/www/web/util/mysql-connector-java-5.1.10-bin.jar:/var/www/web/util/dbDump.jar:.:/var/www/web/users/thanh.dang@vancouver.wsu.edu/jobs/job39_157/classes.jar dbDump --dbUser root --dbPassword linhtinh --dbNoTimestamp --dbTablePrefix testSerial1_157 --dbDatabase  --redirect /var/www/web/users/thanh.dang@vancouver.wsu.edu/jobs/job39_157/dblogger.log --verbose --classes TestSerialMsg 83  --connect 127.0.0.1:9001::1 
+number of mote program 1
+ counting ...  
+Reprogramming mote 1
+Command : /var/www/web/bin/msp430-bsl --telosb -c /dev/ttyUSB0-r -e -I -p 
+Program: "/var/www/web/users/thanh.dang@vancouver.wsu.edu/jobs/job39_157/1.ihex"
+erase mote 
+upload new program
+moteoutput:Reprogramming 1
+
+/var/www/web/daemon/cents-daemon.pl ran @ Tue Oct  2 16:14:01 2012
+Started programming motes...
+Reprogramming 1
+
+Started new job with jobID 39
+jobs-daemon finished.  operation took 5 seconds
+/var/www/web/users/thanh.dang@vancouver.wsu.edu/jobs/job39_157/data/
+Command : /var/www/web/bin/msp430-bsl --telosb -c /dev/ttyUSB0-r -e -I -p 
+Program: 
+upload null image
+Reprogramming 1
+/var/www/web/bin/msp430-bsl --telosb -c /dev/ttyUSB0-r -e -I -p /var/www/web/daemon/cents-daemon.pl ran @ Tue Oct  2 16:18:01 2012
+	Killed old job with jobID 39
+jobs-daemon finished.  operation took 7 seconds
